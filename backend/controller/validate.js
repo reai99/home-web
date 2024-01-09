@@ -48,7 +48,10 @@ module.exports = {
     if(res.length) {
       const token = generateToken(username);
       ctx.cookies.set('token', token, { httpOnly: true, overwrite: true, maxAge:  12 * 3600 * 1000 });
-      ctx.redirect('/');
+      return ctx.body = {
+        code: 200,
+        message: '登陆成功',
+      }
     } else {
       return ctx.body = {
         code: -1,

@@ -26,7 +26,7 @@ export default defineConfig(({ command, mode }) => {
       hmr: true,
       open: true,
       proxy: {
-        '/api/common': {
+        '/api': {
           target: 'http://localhost:7001',
           changeOrigin: true,
           secure: false,
