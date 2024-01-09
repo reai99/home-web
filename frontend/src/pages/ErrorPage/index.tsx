@@ -1,9 +1,10 @@
+import { FC } from 'react';
 import './index.less';
 
-const NotFound: FC<IProps> = () => {
+const NotFound: FC = () => {
   return (
     <div className="not-found-wrapper">
-      <div class="starsec"></div>
+      <div className="starsec"></div>
       <div className="lamp__wrap">
         <div className="lamp">
           <div className="cable"></div>

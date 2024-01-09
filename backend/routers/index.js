@@ -7,8 +7,9 @@ router.all('/api/common/template/download', Controler['common'].templateDownload
 router.all('/api/common/import', Controler['common'].importProcess);
 router.all('/api/common/download', Controler['common'].downloadProcess);
 
-router.get('/api/login', Controler['validate'].login);
-router.get('/api/logout', Controler['validate'].logout);
+router.post('/api/register', Controler['validate'].register);
+router.post('/api/login', Controler['validate'].login);
+router.post('/api/logout', Controler['validate'].logout);
 
 router.all('/api/common/stream', Controler['common'].streamProcess)
 

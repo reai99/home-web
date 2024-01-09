@@ -2,16 +2,27 @@ import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
 
 /** @type {import('vite').UserConfig} */
-export default defineConfig(({ mode }) => {
+export default defineConfig(({ command, mode }) => {
   // 定义环境变量
   const env = loadEnv(mode, process.cwd(), '');
-  
-  return {
+
+  const isDev = command === 'serve';
+
+  const commonConfig = {
     plugins: [react()],
     define: {
       __APP_ENV__: JSON.stringify(env.APP_ENV),
     },
-    server: {
+    sourceMap: true,
+    resolve: {
+      alias: {
+        '@': '/src'
+      }
+    },
+  }
+
+  if(isDev) {
+    commonConfig.server = {
       hmr: true,
       open: true,
       proxy: {
@@ -22,5 +33,14 @@ export default defineConfig(({ mode }) => {
         }
       },
     }
+  } else {
+    commonConfig.minify = true;
+    commonConfig.build = {
+      outDir: '../backend/public',
+      assetsDir: 'static'
+
+    }
   }
+
+  return commonConfig;
 })

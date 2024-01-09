@@ -4,7 +4,7 @@ const path = require('path');
 
 let db;
 
-const DB_NAME = 'node-scheduler.db';
+const DB_NAME = 'sqlite.db';
 
 /**
  * 连接表
@@ -153,11 +153,11 @@ exports.updateData = (tableName, paramsObj = {}) => {
  * @param {string} tableName 
  * @returns 
  */
-exports.selectData = tableName => {
+exports.selectData = (tableName, extraSql) => {
   return new Promise(async (resolve, reject) => {
     try {
       await connectionSqlite();
-      let sql = `SELECT * FROM ${tableName}`;
+      let sql = `SELECT * FROM ${tableName} ${extraSql}`;
       console.log(`select sql is ${sql}`);
       db.all(sql, [], (err, rows) => {
         if (err) {

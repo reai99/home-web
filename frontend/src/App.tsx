@@ -1,23 +1,28 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import './App.css';
-import Login from './Login';
-import NotFound from './NotFound';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import ErrorPage from './pages/ErrorPage';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    errorElement: <NotFound/>,
+    errorElement: <ErrorPage/>,
+    element: <Home/>,
+  },
+  {
+    path: "/login",
     element: <Login/>,
   }
 ]);
 
 function App() {
+
   return (
     <>
-      <RouterProvider router={router} err/>
+      <RouterProvider router={router} />
     </>
   )
 }
 
-// eslint-disable-next-line react-refresh/only-export-components
 export default App;
