@@ -10,6 +10,14 @@ class Common {
       return Promise.reject(error)
     }
   })
+  userRegister = flow(function* (payload) {
+    try {
+      const res = yield fetch('/api/register', 'post', payload);
+      return res;
+    } catch (error) {
+      return Promise.reject(error)
+    }
+  })
 }
 
 export default new Common();
