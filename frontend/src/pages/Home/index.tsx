@@ -1,12 +1,12 @@
 import { FC } from "react";
-
+import CardBox from "../components/CardBox";
 
 interface IProps {}
 
 const Home: FC<IProps> = () => {
   return (
     <>
-      这个是主页
+      <CardBox/>
     </>
   )
 }

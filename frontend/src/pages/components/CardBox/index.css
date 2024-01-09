@@ -1,0 +1,126 @@
+:root {
+  --card-height: 240px;
+  --card-width: calc(var(--card-height) / 1.5);
+}
+
+body {
+  background: #212534;
+}
+
+.box {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex-direction: row;
+  padding: 20px;
+  margin: 0 auto;
+  /* background: #212534; */
+}
+
+.card {
+  width: var(--card-width);
+  height: var(--card-height);
+  background: #191c29;
+  margin: 10px;
+  position: relative;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 60px;
+  color: #eee;
+  cursor: pointer;
+  font-family: cursive;
+}
+
+.card:hover {
+  color: #b7eb8f;
+  transition: color 1s;
+}
+.card:hover:before,.card:hover:after {
+  animation: none;
+  opacity: 0;
+}
+
+
+.card::before {
+  content: "";
+  width: 104%;
+  height: 102%;
+  border-radius: 8px;
+  background-image: linear-gradient(
+    var(--rotate)
+    , #b7eb8f, #73d13d 43%, #237804);
+    position: absolute;
+    z-index: -1;
+    top: -1%;
+    left: -2%;
+    animation: spin 2.5s linear infinite;
+}
+
+.card::after {
+  position: absolute;
+  content: "";
+  top: calc(var(--card-height) / 6);
+  left: 0;
+  right: 0;
+  z-index: -1;
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  transform: scale(0.8);
+  filter: blur(calc(var(--card-height) / 6));
+  background-image: linear-gradient(
+    var(--rotate)
+    , #b7eb8f, #73d13d 43%, #237804);
+    opacity: 1;
+  transition: opacity .5s;
+  animation: spin 2.5s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    --rotate: 0deg;
+  }
+  100% {
+    --rotate: 360deg;
+  }
+}
+
+
+@property --rotate {
+  syntax: "<angle>";
+  initial-value: 132deg;
+  inherits: false;
+}
+
+
+.element {
+  height: 100%;
+  position: relative;
+  border-radius: 10px;
+  width: 100%;
+}
+
+.element::before {
+  content: '';
+  position: absolute;
+  width: calc(100% + 3px);
+  height: calc(100% + 3px);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  background: radial-gradient(250px circle at var(--x) var(--y),#b7eb8f 0,transparent 100%);;
+}
+.element .mask {
+  position: absolute;
+  inset: 3px;
+  background: #172033;
+  border-radius: 10px;
+   display: flex;
+  justify-content: center;
+  align-items: center;
+}
