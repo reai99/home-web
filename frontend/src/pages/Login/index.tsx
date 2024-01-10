@@ -54,7 +54,7 @@ const Login: FC<IProps> = () => {
           isRequired: '1',
           fieldType: FIELD_TYPE_INPUT,
           rules: [
-            { max: 15, type: 'number', message: '最大长度为15' },
+            { max: 20, message: '最大长度为20' },
           ],
         },
         {
@@ -64,7 +64,7 @@ const Login: FC<IProps> = () => {
           fieldType: FIELD_TYPE_INPUT,
           type: 'password',
           rules: [
-            { max: 16, type: 'number', message: '最大长度为16' },
+            { max: 20, message: '最大长度为20' },
           ],
         }
       ]

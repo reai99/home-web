@@ -1,6 +1,6 @@
-import React, { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 
-import './index.css';
+import './index.less';
 
 const STR = 'ZHU QIAN YANG';
 
@@ -8,16 +8,22 @@ interface IProps {
 
 }
 
+interface styleDistanceProps {
+  [key: number]: Record<string, string>
+}
+
 const CardBox:FC <IProps> = () => {
 
+  const [styleDistance, setStyleDistance] = useState<styleDistanceProps>({});
+
   useEffect(() => {
-    const elements = document.getElementsByClassName("element");
+    const elements = document.getElementsByClassName("card-box-item");
     // 添加鼠标移动事件监听器
     document.addEventListener("mousemove", function (event) {
       // 获取鼠标位置
       const mouseX = event.pageX;
       const mouseY = event.pageY;
-
+      const _styleInstance: styleDistanceProps = {};
       // 遍历元素并输出距离鼠标的坐标
       for (let i = 0; i < elements.length; i++) {
         const element = elements[i];
@@ -27,18 +33,23 @@ const CardBox:FC <IProps> = () => {
 
         const distanceX = mouseX - elementX;
         const distanceY = mouseY - elementY;
-        
-        // 将距离值设置到每一个卡片元素上面
-        element.style.setProperty('--x', distanceX + 'px');
-        element.style.setProperty('--y', distanceY + 'px');
-    }
-});
+
+        _styleInstance[i] = {
+          '--x': distanceX + 'px',
+          '--y': distanceY + 'px'
+        }
+      }
+      setStyleDistance({
+        ...styleDistance,
+        ..._styleInstance,
+      })
+    });
   }, [])
 
-  const generateCardCol = (v) => {
+  const generateCardCol = (v: string, i: number) => {
     return (
-      <div className="card">
-        <div className="element">
+      <div className="card-box-item" style={styleDistance[i]}>
+        <div className="card-box-item-container">
           <div className="mask">{v}</div>
         </div>
       </div>
@@ -47,8 +58,8 @@ const CardBox:FC <IProps> = () => {
 
   const generateCard = () => {
     return (
-      <div className="box">
-        {STR.split('').map((v) => generateCardCol(v))}
+      <div className="card-box-wrapper" >
+        {STR.split('').map((v, i) => generateCardCol(v, i))}
       </div>
     )
   }
