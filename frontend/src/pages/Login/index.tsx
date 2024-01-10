@@ -2,6 +2,7 @@ import { FC } from "react";
 import { useStore } from '../../_utils/store';
 import { FORM_FIELD_TYPE, DynamicFormRender } from 'antd-dynamic-form-render';
 import { Button, Form, notification } from "antd";
+import { useNavigate } from 'react-router-dom';
 
 import './index.less';
 
@@ -13,9 +14,11 @@ interface IProps {
 
 const Login: FC<IProps> = () => {
 
+  const navigate = useNavigate();
+
   const [form] = Form.useForm();
   
-  const { common, routing } = useStore('common', 'routing');
+  const { common } = useStore('common');
 
   const handleLogin = async () => {
     try {
@@ -34,7 +37,7 @@ const Login: FC<IProps> = () => {
   }
 
   const handleToRegister = () => {
-    console.log(routing)
+    navigate('/register');
   }
 
   const generateFrom = () => {
@@ -51,7 +54,7 @@ const Login: FC<IProps> = () => {
           isRequired: '1',
           fieldType: FIELD_TYPE_INPUT,
           rules: [
-            { max: 30, message: '最大长度为30' },
+            { max: 15, type: 'number', message: '最大长度为15' },
           ],
         },
         {
@@ -61,7 +64,7 @@ const Login: FC<IProps> = () => {
           fieldType: FIELD_TYPE_INPUT,
           type: 'password',
           rules: [
-            { max: 30, message: '最大长度为30' },
+            { max: 16, type: 'number', message: '最大长度为16' },
           ],
         }
       ]

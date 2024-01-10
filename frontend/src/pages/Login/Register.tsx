@@ -56,7 +56,13 @@ const Login: FC<IProps> = () => {
           placeholder: '请输入账号',
           fieldType: FIELD_TYPE_INPUT,
           rules: [
-            { max: 30, message: '最大长度为30' },
+            { max: 15,  message: '最大长度为15' },
+            { min: 6, message: '最小长度为6' },
+            { 
+              pattern: /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/, 
+              message: '只允许英文字母、数字、下划线、英文句号、以及中划线的组成',
+              validateTrigger: 'onBlur',
+            }
           ],
         },
         {
@@ -67,7 +73,13 @@ const Login: FC<IProps> = () => {
           type: 'password',
           placeholder: '请输入密码',
           rules: [
-            { max: 30, message: '最大长度为30' },
+            { max: 16, message: '最大长度为16' },
+            { min: 8, message: '最小长度为8' },
+            { 
+              pattern: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]$/,
+              message: '至少1个字母，1个数字和1个特殊字符',
+              validateTrigger: 'onBlur',
+            }
           ],
         },
         {
@@ -78,7 +90,13 @@ const Login: FC<IProps> = () => {
           type: 'password',
           placeholder: '请再次输入密码',
           rules: [
-            { max: 30, message: '最大长度为30' },
+            { max: 16, message: '最大长度为16' },
+            { min: 8, message: '最小长度为8' },
+            { 
+              pattern: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]$/,
+              message: '至少1个字母，1个数字和1个特殊字符',
+              validateTrigger: 'onBlur',
+            }
           ],
         }
       ]
