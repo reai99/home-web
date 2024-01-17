@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from "react";
 
 import './index.less';
 
-const STR = 'ZHU QIAN YANG';
+const STR = 'HELLO';
 
 interface IProps {
 
@@ -44,7 +44,7 @@ const CardBox:FC <IProps> = () => {
         ..._styleInstance,
       })
     });
-  }, [])
+  }, [styleDistance])
 
   const generateCardCol = (v: string, i: number) => {
     return (

@@ -16,7 +16,7 @@ export default defineConfig(({ command, mode }) => {
     sourceMap: true,
     resolve: {
       alias: {
-        '@': '/src'
+        '@src': '/src'
       }
     },
   }

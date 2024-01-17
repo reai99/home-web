@@ -1,5 +1,5 @@
 import { FC } from "react";
-import CardBox from "../components/CardBox";
+import CardBox from "@src/_components/CardBox";
 
 interface IProps {}
 
