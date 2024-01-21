@@ -1,19 +1,32 @@
-import { FC, useEffect, useState } from "react";
-
+import { FC, useEffect, useRef, useState } from "react";
+import CModal from "../CModal";
 import './index.less';
+import { notification } from "antd";
 
-const STR = 'HELLO';
+type ItemProps = {
+  title: string;
+  code: string;
+  tagName?: string;
+  tagColor?: string;
+  description?: string;
+};
 
 interface IProps {
-
+  items: ItemProps[],
+  onEvent?: {
+    click: () => void,
+  }
 }
 
 interface styleDistanceProps {
   [key: number]: Record<string, string>
 }
 
-const CardBox:FC <IProps> = () => {
+const CardBox:FC <IProps> = (props) => {
 
+  const { items, onEvent } = props;
+
+  const detailModalRef = useRef(null);
   const [styleDistance, setStyleDistance] = useState<styleDistanceProps>({});
 
   useEffect(() => {
@@ -44,13 +57,34 @@ const CardBox:FC <IProps> = () => {
         ..._styleInstance,
       })
     });
-  }, [styleDistance])
+  }, [styleDistance]);
 
-  const generateCardCol = (v: string, i: number) => {
+  const handleClick = (v: ItemProps, e) => {
+    switch (v.targetType) {
+      case '1':
+        detailModalRef.current?.openModal({
+          title: v.className,
+          content: v.description,
+        });
+        break;
+      case '2':
+        onEvent?.click?.(v, e);
+        break;
+      case '3':
+        window.open(v.serverUrl, '_blank');
+        break;
+    }
+  }
+
+  const generateCardCol = (v: ItemProps, i: number) => {
     return (
-      <div className="card-box-item" style={styleDistance[i]}>
-        <div className="card-box-item-container">
-          <div className="mask">{v}</div>
+      <div className="card-box-item" style={styleDistance[i]} key={v.code}>
+        <div className="card-box-item-container" onClick={(e) => handleClick(v, e)}>
+          <div className="card-box-content">
+            <div className="card-box-tag" style={{ background: v.tagColor }}>{v.tagName}</div>
+            <div className="card-box-title">{v.title}</div>
+            <div className="card-box-desc">{v.description}</div>
+          </div>
         </div>
       </div>
     )
@@ -59,7 +93,8 @@ const CardBox:FC <IProps> = () => {
   const generateCard = () => {
     return (
       <div className="card-box-wrapper" >
-        {STR.split('').map((v, i) => generateCardCol(v, i))}
+        {items.map((v, i) => generateCardCol(v, i))}
+        {<CModal ref={detailModalRef}/>}
       </div>
     )
   }

@@ -1,0 +1,53 @@
+@text-color: #ffffff; 
+.ant-menu-dark {
+  background: color-mix(in srgb, #fff, #161f2f 100%)!important;
+}
+.navigation-wrapper{
+  padding: 9px 0;
+  max-height: 50px;
+  background: color-mix(in srgb, #fff, #101827 100%)!important;
+  // background-color: rgba(00, 15, 29, 0.5);
+  display: flex;
+  justify-content: space-between;
+  .navigation-logo {
+    width: 256px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 800;
+  }
+  .navigation-right{
+    margin-right: 10px;
+    .navigation-right-login {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      .login-img {
+        height: 32px;
+        width: 32px;
+        padding: 2px;
+        box-sizing: border-box;
+        overflow: hidden;
+        border: 2px solid #bbb;
+        border-radius: 50%;
+      }
+      span {
+        margin-left: 4px;
+      }
+    }
+  }
+}
+
+.main-container-wrapper{
+  display: flex;
+  .container-sidebar-wrapper {
+    flex: 1;
+    max-width: 256px;
+  }
+  .container-content-wrapper {
+    flex: auto;
+    padding: 0 10px;
+  }
+}

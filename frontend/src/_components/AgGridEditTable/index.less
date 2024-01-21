@@ -1,0 +1,58 @@
+.ag-theme-alpine {
+  --ag-background-color: color-mix(in srgb,#fff,#182230 97%);
+  --ag-foreground-color: #fff;
+  --ag-border-color: hsla(0,0%,100%,.16);
+  --ag-secondary-border-color: color-mix(in srgb,transparent,var(--ag-foreground-color) 10%);
+  --ag-header-background-color: color-mix(in srgb,#fff,#182230 93%);
+  --ag-tooltip-background-color: color-mix(in srgb,#fff,#182230 96%);
+  --ag-control-panel-background-color: color-mix(in srgb,#fff,#182230 93%);
+  --ag-input-disabled-background-color: #68686e12;
+  --ag-card-shadow: 0 1px 20px 1px #000;
+  --ag-input-border-color: var(--ag-border-color);
+  --ag-input-disabled-border-color: hsla(0,0%,100%,.07);
+  --ag-checkbox-unchecked-color: color-mix(in srgb,var(--ag-background-color),var(--ag-foreground-color) 40%);
+  --ag-row-hover-color: color-mix(in srgb,transparent,var(--ag-active-color) 20%);
+  --ag-selected-row-background-color: var(--ag-row-hover-color);
+  --ag-advanced-filter-join-pill-color: #7a3a37;
+  --ag-advanced-filter-column-pill-color: #355f2d;
+  --ag-advanced-filter-option-pill-color: #5a3168;
+  --ag-advanced-filter-value-pill-color: #374c86;
+  --ag-popup-shadow: 0 1px 6px rgba(0,0,0,.5);
+  color-scheme: dark;
+  .ag-header-cell-comp-wrapper {
+    padding: 0 6px;
+  }
+  
+  /*  动态表单主题设置 */
+  input,
+  .dynamic-table-cell-field .field-view-wraper {
+    color: #d6d3d3!important;
+  }
+  .ant-select-selection-placeholder,
+  input::placeholder {
+    color: rgba(255,255,255,.3)!important;
+  }
+  .anticon {
+    color: #bbb;
+  }
+}
+
+.edit-ag-grid-container {
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.dynamic-table-cell-field {
+  height: 100%;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  .dynamic-field-render {
+    border-radius: 0 !important;
+    border: 0 !important;
+  }
+  .ant-form {
+    width: 100%;
+  }
+}

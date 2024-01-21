@@ -157,7 +157,7 @@ exports.selectData = (tableName, extraSql) => {
   return new Promise(async (resolve, reject) => {
     try {
       await connectionSqlite();
-      let sql = `SELECT * FROM ${tableName} ${extraSql}`;
+      let sql = `SELECT * FROM ${tableName} ${extraSql || ''}`;
       console.log(`select sql is ${sql}`);
       db.all(sql, [], (err, rows) => {
         if (err) {

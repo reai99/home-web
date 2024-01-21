@@ -1,6 +1,7 @@
 :root {
   --card-height: 240px;
   --card-width: calc(var(--card-height) / 1.5);
+  --card-border-width: 4%,
 }
 
 @property --rotate {
@@ -32,7 +33,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 60px;
     color: #eee;
     cursor: pointer;
     font-family: cursive;
@@ -42,17 +42,19 @@ body {
     color: #b7eb8f;
     transition: color 1s;
   }
-  .card-box-item:hover:before,
-  .card-box-item:hover:after {
-    animation: none;
-    opacity: 0;
+
+  .card-box-item:hover:before {
+    width: 106%;
+    height: 104%;
+    top: -2%;
+    left: -3%;
   }
 
   .card-box-item::before {
     content: "";
     width: 104%;
     height: 102%;
-    border-radius: 8px;
+    border-radius: 10px;
     background-image: linear-gradient(
       var(--rotate)
       , #b7eb8f, #73d13d 43%, #237804);
@@ -87,6 +89,7 @@ body {
     position: relative;
     border-radius: 10px;
     width: 100%;
+    // overflow: hidden;
   }
   
   .card-box-item-container::before {
@@ -97,18 +100,65 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border-radius: 10px;
-    background: radial-gradient(250px circle at var(--x) var(--y), rgb(27, 229, 229) 0,transparent 100%);;
+    border-radius: 6px;
+    background: radial-gradient(30px circle at var(--x) var(--y), rgb(26, 208, 135) 0,transparent 100%);
   }
   
-  .card-box-item-container .mask {
-    position: absolute;
+  .card-box-item-container .card-box-content {
+    height: 100%;
     inset: 3px;
     background: #172033;
     border-radius: 10px;
-     display: flex;
-    justify-content: center;
-    align-items: center;
+  }
+
+  .card-box-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    overflow: hidden;
+    color: #ccc;
+    .card-box-title {
+      font-size: 26px;
+      text-align: center;
+      overflow: hidden;
+      font-weight: 800;
+      padding: 25% 0 ;
+    }
+    .card-box-desc {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      padding: 0 5px;
+      box-sizing: border-box;
+      text-overflow: ellipsis;
+      position: absolute;
+      font-size: 13px;
+      bottom: 0;
+      height: 40px;
+      width: 100%;
+      word-break: break-all;
+      bottom: 10px;
+      text-align: center;
+    }
+    .card-box-tag {
+      position: absolute;
+      top: 16px;
+      padding: 0px 6px;
+      background-color: rgb(26, 208, 135);
+      color: #fff;
+      border-radius: 16px 0 0 16px;
+      right: 0;
+      font-weight: 600;
+    }
+  }
+
+
+  .card-box-item-container:hover .card-box-desc {
+    -webkit-line-clamp: 6;
+    position: relative;
+    height: auto;
+  
   }
 
   @keyframes spin {
