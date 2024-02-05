@@ -1,5 +1,5 @@
 import { FC, useEffect, useMemo, useState } from "react";
-import CardBox from "@src/_components/CardBox";
+import CardBox, { ItemProps, ItemEvent } from "@src/_components/CardBox";
 import { useStore } from "@src/_utils/store";
 import { Spin } from "antd";
 import { useNavigate } from 'react-router-dom';
@@ -12,7 +12,7 @@ const Home: FC<IProps> = () => {
   const navigate = useNavigate();
   const { admin } = useStore('admin');
   const [loading, setLoading] = useState<boolean>(false);
-  const [classList, setClassList] = useState<Record<string, unknown>[]>([]);
+  const [classList, setClassList] = useState<ItemProps[]>([]);
 
 
   const targetTypeMap = useMemo(() => TargetTypeList.reduce((r, c) => {
@@ -39,11 +39,11 @@ const Home: FC<IProps> = () => {
     }
   }
 
-  const onEvent = useMemo(() => {
+  const onEvent: ItemEvent = useMemo(() => {
     return {
-      click: (record) => navigate(`/module?classCode=${record.classCode}`)
+      click: (record: ItemProps) => navigate(`/module?classCode=${record.classCode}`),
     }
-  }, [])
+  }, [navigate])
 
   useEffect(() => {
     fetchClassify();

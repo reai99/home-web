@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import React, { FC, useState, forwardRef, useImperativeHandle, useRef } from "react";
 import { DynamicFormRender } from 'antd-dynamic-form-render';
 import { Form, Modal, notification } from "antd";
@@ -57,7 +59,7 @@ const ModifyModal: FC<IProps> = forwardRef((props, ref) => {
   const handleCancel = () => {
     initialValuesRef.current = {};
     form.resetFields();
-    onEvent?.cancelModal?.(row || {});
+    onEvent?.cancelModal?.();
     setOpen(false);
   }
 

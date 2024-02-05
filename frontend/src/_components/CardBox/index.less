@@ -26,8 +26,9 @@ body {
   .card-box-item {
     width: var(--card-width);
     height: var(--card-height);
+    animation: fadeToRight var(--timer);
     background: #191c29;
-    margin: 10px;
+    margin: 20px;
     position: relative;
     border-radius: 6px;
     display: flex;
@@ -36,6 +37,7 @@ body {
     color: #eee;
     cursor: pointer;
     font-family: cursive;
+
   }
 
   .card-box-item:hover {
@@ -168,6 +170,17 @@ body {
     100% {
       // transform: rotate(0deg);
       --rotate: 360deg
+    }
+  }
+
+  @keyframes fadeToRight{
+    0%{
+      opacity: 0;
+      transform: translate(-90px, -90px);
+    }
+    100%{
+      opacity: 1;
+      transform: translate(0, 0);
     }
   }
   

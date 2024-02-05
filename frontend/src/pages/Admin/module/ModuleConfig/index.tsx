@@ -12,7 +12,7 @@ const {
   FIELD_TYPE_SWITCH,
 } = FORM_FIELD_TYPE;
 
-const ModuleConfig = (props) => {
+const ModuleConfig = () => {
 
   const navigate = useNavigate();
   const { admin } = useStore('admin');
@@ -41,7 +41,7 @@ const ModuleConfig = (props) => {
     return values;
   };
 
-  const conmmonProps = {
+  const conmmonProps: any = {
     columns: [
       {
         title: "分类编码",

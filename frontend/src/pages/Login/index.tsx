@@ -29,7 +29,7 @@ const Login: FC<IProps> = () => {
         description: '登陆成功'
       })
       setTimeout(() => {
-        window.location.href = '/';
+        navigate('/admin');
       }, 500);
     } catch (error) {
       console.log(error);
@@ -76,7 +76,7 @@ const Login: FC<IProps> = () => {
     return (
       <div className="login-btn-warpper">
         <Button type="primary" onClick={handleLogin}>登陆</Button>
-        <a className="login-btn-register" onClick={handleToRegister}>注册</a>
+        {/* <a className="login-btn-register" onClick={handleToRegister}>注册</a> */}
       </div>
     )
   }

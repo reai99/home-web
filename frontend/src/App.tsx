@@ -12,7 +12,6 @@ const transformRouters = (routers) => {
   routers.map((v) => {
     const { component } = v;
     const Ele = lazy(component);
-    // const Ele = component;
     v.element = <Ele />;
     v.errorElement = <ErrorPage />;
     if(v.children instanceof Array) transformRouters(v.children);

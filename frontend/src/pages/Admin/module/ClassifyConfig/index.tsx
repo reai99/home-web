@@ -13,7 +13,7 @@ const {
   FIELD_TYPE_SELECT,
 } = FORM_FIELD_TYPE;
 
-const ClassifyConfig = (props) => {
+const ClassifyConfig = () => {
 
 
   const navigate = useNavigate();
@@ -26,7 +26,7 @@ const ClassifyConfig = (props) => {
     return r;
   }, {}), []);
 
-  const conmmonProps = {
+  const conmmonProps: any = {
     columns: [
       {
         title: "分类编码",

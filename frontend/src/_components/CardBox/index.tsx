@@ -1,21 +1,28 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import { FC, useEffect, useRef, useState } from "react";
 import CModal from "../CModal";
 import './index.less';
-import { notification } from "antd";
 
-type ItemProps = {
+export type ItemProps = {
   title: string;
   code: string;
+  classCode?: string;
+  className?: string;
+  targetType?: string;
+  serverUrl?: string;
   tagName?: string;
   tagColor?: string;
   description?: string;
 };
 
+export type ItemEvent = {
+  click: (record: unknown) => void
+}
+
 interface IProps {
-  items: ItemProps[],
-  onEvent?: {
-    click: () => void,
-  }
+  items?: ItemProps[];
+  onEvent?: ItemEvent;
 }
 
 interface styleDistanceProps {
@@ -68,7 +75,7 @@ const CardBox:FC <IProps> = (props) => {
         });
         break;
       case '2':
-        onEvent?.click?.(v, e);
+        onEvent?.click?.(v);
         break;
       case '3':
         window.open(v.serverUrl, '_blank');
@@ -78,7 +85,13 @@ const CardBox:FC <IProps> = (props) => {
 
   const generateCardCol = (v: ItemProps, i: number) => {
     return (
-      <div className="card-box-item" style={styleDistance[i]} key={v.code}>
+      <div 
+        className="card-box-item"
+        style={{
+          "--timer": i*0.15 + "s", 
+          ...styleDistance[i],
+        }}
+      >
         <div className="card-box-item-container" onClick={(e) => handleClick(v, e)}>
           <div className="card-box-content">
             <div className="card-box-tag" style={{ background: v.tagColor }}>{v.tagName}</div>

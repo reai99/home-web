@@ -6,7 +6,6 @@ module.exports = {
   async list(ctx) {
     const data = ctx.request.body || {};
     let condition;
-    console.log(data, 'data')
     if(data.target) { 
       condition = `WHERE targetType = '${data.target}'`
     }

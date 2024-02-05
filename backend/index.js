@@ -36,8 +36,17 @@ app.use(jwt({
   cookie: 'token',
   getToken: (ctx) => ctx.request.query.token,
 }).unless({ 
-  path: [/^\/static/, /^\/login/, /^\/api\/register/,  /\/api\/login/, /\/api\/logout/]
-}));
+path: [
+  /^\/static/,
+  /^\/login/,
+  /^\/register/,
+  /\/api\/login/,
+  /^\/api\/register/,
+  /\/api\/logout/,
+  /\/api\/common/,
+  "/",
+  /^\/module/,
+]}));
 
 app.use(middles.static(['/static/js/*', '/static/css/*', '/static/*', '/assets/*'],{
   dir: __dirname + '/public/',

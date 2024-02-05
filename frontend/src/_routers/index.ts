@@ -1,8 +1,8 @@
-import common from './common';
 import admin from './admin';
+import index from './home';
 
 export default [
-  ...common,
+  ...index,
   ...admin,
 ]
 

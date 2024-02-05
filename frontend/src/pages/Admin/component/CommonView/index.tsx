@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import React, { FC, useEffect, useRef, useState } from "react";
 import { Button, Tooltip, Popconfirm, notification } from "antd";
 import { QuestionCircleOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons';
@@ -6,21 +8,22 @@ import ModifyModal from "./ModifyModal";
 
 import "./index.less";
 
-interface IProps {
-  columns: Record<string, unknown>[];
-  dataSource: unknown[];
-  formList: unknown[];
-  api: Record<string, unknown>;
-  onFormatSubmitData: () => void;
-  onEvent?: {
-    openModal: () => void,
-    formatData: () => void,
-    cancelModal: () => void,
-  }
+type EventProps = {
+  openModal: (record?: any) => void,
+  formatData: (record?: any) => void,
+  cancelModal: (record?: any) => void,
+}
+
+export interface IProps {
+  columns: Record<string, any>[];
+  dataSource: any[];
+  formList: any[];
+  api: Record<string, any>;
+  onEvent?: EventProps;
 }
 
 const ConmonView: FC<IProps> = (props) => {
-  const { columns, formList, api, onFormatSubmitData, onEvent } = props;
+  const { columns, formList, api, onEvent } = props;
 
   let gridApi;
   const [loading, setLoading] = useState<boolean>(false);

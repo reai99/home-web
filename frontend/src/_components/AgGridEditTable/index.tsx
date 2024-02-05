@@ -1,3 +1,6 @@
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import React, { Component } from "react";
 import { AgGridReact } from "ag-grid-react";
 import { Spin } from "antd";

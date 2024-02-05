@@ -11,7 +11,7 @@ import "./index.less";
 
 type ContentIProp = {
   title?: string;
-  content?: unknown;
+  content?: any;
 };
 
 interface IProps {}

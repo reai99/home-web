@@ -7,10 +7,10 @@ import { useLocation } from 'react-router-dom';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
-const Sidebar: FC<IProps> = () => {
+const Sidebar: FC= () => {
 
   const { pathname } = useLocation();
-  const pathKeyMapRef = useRef<Record<string, sting>>({});
+  const pathKeyMapRef = useRef<unknown>({});
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   const [currSelectKeys, setCurrSelectKeys] = useState<string[]>([]);
 
@@ -20,12 +20,11 @@ const Sidebar: FC<IProps> = () => {
   }
 
   const getMenuItems = (menus, fullPath = '') => {
-    return menus.map(({ name: label, key, path, icon, children, type }) => {
+    return menus.map(({ name: label, key, path, children, type }) => {
       const _key = key || path;
       let _path = path;
       const menuItem: MenuItem = {
         key: _key,
-        icon,
         label,
         children,
         type,
@@ -59,8 +58,8 @@ const Sidebar: FC<IProps> = () => {
         style={{ height: '100vh' }}
         selectedKeys={currSelectKeys}
         items={menuItems}
-        onSelect={handleSelect}
         theme="dark"
+        onSelect={handleSelect as any}
       />
     )
   }

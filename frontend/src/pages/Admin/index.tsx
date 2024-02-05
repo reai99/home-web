@@ -1,13 +1,13 @@
 import { FC } from 'react';
 import { Outlet } from 'react-router-dom';
+import Sidebar from './Sidebar';
 import Navigation from './Navigation';
-import Sidebar from './SideBar';
 
 import './index.less';
 
 interface IProps {}
 
-const Admin:FC<IProps> = (props) => {
+const Admin:FC<IProps> = () => {
 
   return (
     <>

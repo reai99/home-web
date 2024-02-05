@@ -25,6 +25,11 @@ export default defineConfig(({ command, mode }) => {
     commonConfig.server = {
       hmr: true,
       open: true,
+      historyApiFallback: true,
+      allowedHosts: 'all',
+      headers: {
+        'Access-Control-Allow-Origin': '*'
+      },
       proxy: {
         '/api': {
           target: 'http://localhost:7001',
@@ -36,6 +41,7 @@ export default defineConfig(({ command, mode }) => {
   } else {
     commonConfig.minify = true;
     commonConfig.build = {
+      tsc: false,
       outDir: '../backend/public',
       assetsDir: 'static'
 

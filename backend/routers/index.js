@@ -23,13 +23,13 @@ router.get('/api/common/scheduler/del_task', Controler['scheduler'].delTask);
 router.post('/api/common/scheduler/upd_task', Controler['scheduler'].updTask);
 
 // 后台管理——分类管理
-router.post('/api/admin/classify/list', Controler['admin_classify'].list)
+router.post('/api/common/classify/list', Controler['admin_classify'].list)
 router.post('/api/admin/classify/add', Controler['admin_classify'].add);
 router.post('/api/admin/classify/update', Controler['admin_classify'].update);
 router.get('/api/admin/classify/delete', Controler['admin_classify'].delete);
 
 // 后台管理——模块管理
-router.post('/api/admin/modules/list', Controler['admin_modules'].list)
+router.post('/api/common/modules/list', Controler['admin_modules'].list)
 router.post('/api/admin/modules/add', Controler['admin_modules'].add);
 router.post('/api/admin/modules/update', Controler['admin_modules'].update);
 router.get('/api/admin/modules/delete', Controler['admin_modules'].delete);

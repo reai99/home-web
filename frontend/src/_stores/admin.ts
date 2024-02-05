@@ -4,7 +4,7 @@ import { fetch } from "../_utils/http";
 class Admin {
   getClassifyList = flow(function* (payload) {
     try {
-      const { data } = yield fetch('/api/admin/classify/list', 'post', payload);
+      const { data } = yield fetch('/api/common/classify/list', 'post', payload);
       return data;
     } catch (error) {
       return Promise.reject(error)
@@ -37,7 +37,7 @@ class Admin {
 
   getModulesList = flow(function* (payload) {
     try {
-      const { data } = yield fetch('/api/admin/modules/list', 'post', payload);
+      const { data } = yield fetch('/api/common/modules/list', 'post', payload);
       return data;
     } catch (error) {
       return Promise.reject(error)
