@@ -19,6 +19,8 @@ const transformRouters = (routers) => {
   return routers
 }
 
+console.log(_routers)
+
 // 转换路由
 const routers = transformRouters(_routers);
 // 创建路由

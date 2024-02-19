@@ -46,6 +46,7 @@ path: [
   /\/api\/common/,
   "/",
   /^\/module/,
+  /^\/exercises/,
 ]}));
 
 app.use(middles.static(['/static/js/*', '/static/css/*', '/static/*', '/assets/*'],{

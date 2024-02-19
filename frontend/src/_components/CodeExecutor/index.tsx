@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import CodeMirror, { ReactCodeMirrorProps } from '@uiw/react-codemirror';
 import { javascript } from '@codemirror/lang-javascript';
-import './index.less';
+import "./index.less";
 
 const CodeExecutor: FC<ReactCodeMirrorProps> = (props) => {
   const [code, setCode] = useState('');

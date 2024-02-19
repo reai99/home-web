@@ -13,7 +13,7 @@ class Classtree {
   })
   detail = flow(function* (payload) {
     try {
-      const { data } = yield fetch('/api/admin/classtree/detail', 'get', payload);
+      const { data } = yield fetch('/api/common/classtree/detail', 'get', payload);
       return data;
     } catch (error) {
       return Promise.reject(error)
@@ -21,7 +21,7 @@ class Classtree {
   })
   detailSave = flow(function* (payload) {
     try {
-      const { data } = yield fetch('/api/admin/classtree/detail/save', 'post', payload);
+      const { data } = yield fetch('/api/common/classtree/detail/save', 'post', payload);
       return data;
     } catch (error) {
       return Promise.reject(error)

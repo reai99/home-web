@@ -36,11 +36,11 @@ router.get('/api/admin/modules/delete', Controler['admin_modules'].delete);
 
 // 知识库——分类树
 router.post('/api/common/classtree/list', Controler['classtree'].list);
+router.get('/api/common/classtree/detail', Controler['classtree'].detail);
 router.post('/api/admin/classtree/add', Controler['classtree'].add);
 router.post('/api/admin/classtree/update', Controler['classtree'].update);
 router.get('/api/admin/classtree/delete', Controler['classtree'].delete);
-router.get('/api/admin/classtree/detail', Controler['classtree'].detail);
-router.post('/api/admin/classtree/detail/save', Controler['classtree'].detailSave);
+router.post('/api/common/classtree/detail/save', Controler['classtree'].detailSave);
 
 // 接口访问
 router.all('/api/(.*)', async function (ctx) {

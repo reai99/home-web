@@ -5,10 +5,6 @@ export default [
     component: () => import('@src/pages/Home'),
   },
   {
-    path: "/module",
-    component: () => import('@src/pages/Home/ModuleList'),
-  },
-  {
     path: "/login",
     component: () => import('@src/pages/Login'),
   },
@@ -16,4 +12,12 @@ export default [
     path: "/register",
     component: () => import('@src/pages/Login/Register'),
   },
+  {
+    path: "/module",
+    component: () => import('@src/pages/Home/ModuleList'),
+  },
+  {
+    path: "/exercises",
+    component: () => import('@src/pages/Home/Exercises'),
+  }
 ]
