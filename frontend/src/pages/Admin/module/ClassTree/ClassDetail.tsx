@@ -4,7 +4,7 @@ import { DynamicFormRender, FORM_FIELD_TYPE } from 'antd-dynamic-form-render';
 import MdEditorComp from "@src/_components/MdEditor";
 import { useStore } from "@src/_utils/store";
 
-const { FIELD_TYPE_INPUT, FIELD_TYPE_TEXTAREA, FIELD_TYPE_COMPONENT } = FORM_FIELD_TYPE;
+const { FIELD_TYPE_INPUT, FIELD_TYPE_COMPONENT } = FORM_FIELD_TYPE;
 
 const ClassDetail: React.FC = (props) => {
 
@@ -66,27 +66,6 @@ const ClassDetail: React.FC = (props) => {
         {
           title: '描述',
           name: 'description',
-          showCount: true,
-          autoSize: { minRows: 6 },
-          fieldType: FIELD_TYPE_TEXTAREA,
-        }
-      ],
-    }
-    return <DynamicFormRender {...formProps} />
-  }
-
-  const generateReferenceCase = () => {
-    const formProps = {
-      form,
-      mode: 'edit',
-      // layout: 'vertical',
-      formLayout: { labelCol: { span: 0 }, wrapperCol: { span: 24 } },
-      layoutType: 'layout',
-      rowCount: 1,
-      formList: [
-        {
-          title: '',
-          name: 'example',
           fieldType: FIELD_TYPE_COMPONENT,
           component: MdEditorComp,
         }
@@ -95,17 +74,11 @@ const ClassDetail: React.FC = (props) => {
     return <DynamicFormRender {...formProps} />
   }
 
-
   const items: TabsProps['items'] = [
     {
       key: '1',
       label: '基本内容',
       children: generateBaseInfo(),
-    },
-    {
-      key: '2',
-      label: '参考案例',
-      children: generateReferenceCase(),
     },
   ];
 
@@ -119,7 +92,7 @@ const ClassDetail: React.FC = (props) => {
 
   return (
     <Spin spinning={loading}>
-      <Tabs items={items} tabBarExtraContent={{ right: generateToolbar() }}/>s
+      <Tabs items={items} tabBarExtraContent={{ right: generateToolbar() }}/>
     </Spin>
   )
 }

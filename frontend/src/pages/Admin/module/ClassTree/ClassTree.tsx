@@ -4,6 +4,7 @@ import { Tree, Input, Space, Button, notification,  } from "antd";
 import { PlusOutlined } from '@ant-design/icons';
 import type { TreeDataNode, TreeProps } from "antd";
 import { useStore } from "@src/_utils/store";
+import { formatSelectToTree, getTreeParentKey } from "@src/_utils";
 import ModifyClassTreeModal from "./ModifyClassTreeModal";
 
 import "./index.less";
@@ -14,25 +15,6 @@ const CONTEXT_MENU_LIST = [
   { key: 'insertChildNode', name: '插入子节点' },
   { key: 'delete', name: '删除节点', style: { color: 'red' } },
 ]
-
-const formatSelectToTree = (list) => {
-  const listParentMap = {};
-  list.forEach(item => {
-    if(!listParentMap[item.parentId]) listParentMap[item.parentId] = [];
-    listParentMap[item.parentId].push(item);
-  });
-  const loop = (list) => {
-    return list.map((v) => {
-      let children = listParentMap[v.key];
-      if(children) children = loop(children);
-      return {
-        ...v,
-        children,
-      }
-    })
-  };
-  return loop(listParentMap['-1'] || [])
-}
 
 const ClassTree: React.FC = (props) => {
 
@@ -57,21 +39,6 @@ const ClassTree: React.FC = (props) => {
     const treeList = formatSelectToTree(res);
     setTreeData(treeList);
   }
-
-  const getParentKey = (key: React.Key, tree: TreeDataNode[]): React.Key => {
-    let parentKey: React.Key;
-    for (let i = 0; i < tree.length; i++) {
-      const node = tree[i];
-      if (node.children) {
-        if (node.children.some((item) => item.key === key)) {
-          parentKey = node.key;
-        } else if (getParentKey(key, node.children)) {
-          parentKey = getParentKey(key, node.children);
-        }
-      }
-    }
-    return parentKey!;
-  };
 
   const formatTreeData = (_treeData) => {
     const result = [..._treeData];
@@ -109,7 +76,7 @@ const ClassTree: React.FC = (props) => {
     const dragKey = info.dragNode.key;
     const dropPos = info.node.pos.split("-");
     const dropPosition =
-      info.dropPosition - Number(dropPos[dropPos.length - 1]); // the drop position relative to the drop node, inside 0, top -1, bottom 1
+      info.dropPosition - Number(dropPos[dropPos.length - 1]); 
 
     const loop = (
       data: TreeDataNode[],
@@ -159,6 +126,7 @@ const ClassTree: React.FC = (props) => {
     setTreeData(data);
   };
 
+  // 选择节点
   const handleSelect = (_selectedKeys) => {
     onSelect && onSelect(_selectedKeys);
     setSelectedKeys(_selectedKeys)
@@ -193,26 +161,21 @@ const ClassTree: React.FC = (props) => {
     setAutoExpandParent(false);
   };
 
+  // 搜索节点
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    console.log(dataListRef.current, '123123');
     const newExpandedKeys = dataListRef.current
-      .map((item) => {
-        if (item.title.indexOf(value) > -1) {
-          return getParentKey(item.key, treeData);
-        }
-        return null;
-      })
-      .filter(
-        (item, i, self): item is React.Key =>
-          !!(item && self.indexOf(item) === i)
-      );
-    console.log(newExpandedKeys, 'newExpandedKeys');
+      .map((item) => item.title.indexOf(value) > -1 ? getTreeParentKey(item.key, treeData) : null)
+      .filter((item, i, self): item is React.Key =>!!(item && self.indexOf(item) === i));
     setExpandedKeys(newExpandedKeys);
     setSearchValue(value);
     setAutoExpandParent(true);
   };
 
+
+  /** 右键菜单事件 ------ start */
+
+  // 删除节点
   const handleDeleteNode = async () => {
     await classtree.delete({ params: { ids: selectedKeys.join(',') }});
     notification.success({ message: '删除成功' });
@@ -220,6 +183,7 @@ const ClassTree: React.FC = (props) => {
     getList();
   }
 
+  // 更新节点
   const handleUpdateNode = (v) => {
     const currNode = dataListRef.current.find((v) => selectedKeys.includes(v.key));
     detailModalRef.current.openModal({
@@ -229,6 +193,7 @@ const ClassTree: React.FC = (props) => {
     });
   }
 
+  // 插入节点
   const handleInsetNode = (v) => {
     const currNode = dataListRef.current.find((v) => selectedKeys.includes(v.key));
     const parentKey = ({ insertNode: 'parentId', insertChildNode: 'key' })[v.key];
@@ -241,7 +206,7 @@ const ClassTree: React.FC = (props) => {
     });
   }
 
-
+  // 点击右键菜单
   const handleContextMenuClick = (v: any) => {
     switch(v.key) {
       case 'delete':
@@ -255,6 +220,8 @@ const ClassTree: React.FC = (props) => {
         break;
     }
   }
+
+  /** 右键菜单事件 ------ end */
 
   useEffect(() => {
     getList();
