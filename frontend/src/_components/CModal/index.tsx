@@ -18,6 +18,8 @@ interface IProps {}
 
 const CModal: FC<IProps> = forwardRef((props, ref) => {
   
+  const { content, width, ...otherProps } = props;
+
   const contentRef = useRef<ContentIProp>({});
   const [open, setOpen] = useState<boolean>(false);
   const [isScreen, setIsScreen] = useState<boolean>(false);
@@ -61,14 +63,15 @@ const CModal: FC<IProps> = forwardRef((props, ref) => {
     return (
       <Modal
         title={generateTitle()}
-        width={isScreen ? "100%" : 800}
+        width={isScreen ? "100%" : width || 800}
         className={`${isScreen ? "screen-full-modal" : ""}`}
         open={open}
         footer={null}
         maskClosable={true}
         onCancel={handleCancel}
+        {...otherProps}
       >
-        <div>{contentRef.current?.content || "暂无内容"}</div>
+        <div>{content || contentRef.current?.content || "暂无内容"}</div>
       </Modal>
     );
   };

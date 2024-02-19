@@ -1,0 +1,84 @@
+.classtree-wrapper {
+  display: flex;
+  height: 100%;
+  .classtree-tree-input {
+    position: absolute;
+    width: 90%;
+  }
+  .classtree-tree-wrapper {
+    flex: 1;
+    max-width: 220px;
+    border: 2px;
+    padding: 10px 6px;
+    height: 100%;
+    overflow-y: auto;
+    position: relative;
+    .classtree-tree {
+      overflow-y: auto;
+      height: calc(100% - 110px);
+    }
+    .classtree-contextmenu {
+      display: none;
+      position: fixed;
+      top: 0;
+      background: rgb(76, 78, 80);
+      max-width: 180px;
+      padding: 4px;
+      border-radius: 4px;
+      box-shadow: 0 0 8px rgba(255, 255, 255, .15);
+      .context-menu-item {
+        padding: 10px;
+        font-size: 13px;
+        cursor: pointer;
+        &:hover {
+          background-color: #525050;
+          border-radius: 5px;
+        }
+      }
+    }
+  }
+  .classtree-content {
+    flex: 1;
+    border-left: 1px solid rgba(233,244,254,0.2);
+    margin: 10px;
+    overflow-y: auto;
+    height: calc(100vh - 60px);
+    position: relative;
+    padding: 0 10px;
+    .classtree-content-btn {
+      text-align: right;
+      padding: 10px;
+    }
+    .dynamic-form-render{
+      background-color: transparent;
+      .ant-col {
+        margin-bottom: 16px;
+      }
+      textarea {
+        background-color: transparent;
+        color: #bbb;
+      }
+      label {
+        color: #fff;
+        font-weight: 600;
+      }
+      input {
+        background-color: transparent;
+        color: #bbb;
+      }
+    }
+  }
+  input::placeholder,
+  textarea::placeholder {
+    color: rgba(255,255,255,.3)!important;
+  }
+  .anticon {
+    color: #bbb;
+  }
+  .site-tree-search-value {
+    color: red;
+  }
+  .ant-btn-primary {
+    box-shadow: none;
+  }
+}

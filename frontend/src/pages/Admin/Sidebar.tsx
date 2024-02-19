@@ -29,10 +29,11 @@ const Sidebar: FC= () => {
         children,
         type,
       };
+      
       if(children instanceof Array) {
-        fullPath += path + '/';
+        _path = fullPath + _path + '/';
         menuItem.type = 'group';
-        menuItem.children = getMenuItems(children, fullPath);
+        menuItem.children = getMenuItems(children, _path);
       } else {
         _path = fullPath + path;
         menuItem.label = <Link to={fullPath + path}>{label}</Link>; 
