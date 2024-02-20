@@ -7,7 +7,11 @@ import { formatSelectToTree, getTreeParentKey } from "@src/_utils";
 
 import "./index.less";
 
-const ClassTree: React.FC = (props) => {
+interface IProps {
+  onSelect?: any;
+}
+
+const ClassTree: React.FC<IProps> = (props) => {
 
   const { onSelect } = props || {};
 
@@ -15,9 +19,9 @@ const ClassTree: React.FC = (props) => {
 
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
   const [treeData, setTreeData] = useState([]);
-  const [expandedKeys, setExpandedKeys] = useState<string[]>([]);
+  const [expandedKeys, setExpandedKeys] = useState<any>([]);
   const [searchValue, setSearchValue] = useState<string>("");
-  const [autoExpandParent, setAutoExpandParent] = useState<string>(true);
+  const [autoExpandParent, setAutoExpandParent] = useState<boolean>(true);
 
   const dataListRef = useRef<TreeDataNode[]>([]);
 
@@ -76,7 +80,7 @@ const ClassTree: React.FC = (props) => {
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     const newExpandedKeys = dataListRef.current
-      .map((item) => item.title.indexOf(value) > -1 ? getTreeParentKey(item.key, treeData) : null)
+      .map((item) => (item.title + '').indexOf(value) > -1 ? getTreeParentKey(item.key, treeData) : undefined)
       .filter((item, i, self): item is React.Key =>!!(item && self.indexOf(item) === i));
     setExpandedKeys(newExpandedKeys);
     setSearchValue(value);

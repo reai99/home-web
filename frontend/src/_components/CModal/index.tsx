@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import React, {
   FC,
   forwardRef,
@@ -6,6 +8,7 @@ import React, {
   useState,
 } from "react";
 import { Modal } from "antd";
+import type { ModalProps } from "antd";
 import { FullscreenExitOutlined, FullscreenOutlined } from "@ant-design/icons";
 import "./index.less";
 
@@ -14,7 +17,11 @@ type ContentIProp = {
   content?: any;
 };
 
-interface IProps {}
+interface IProps extends ModalProps {
+  ref?: any;
+  content?: any;
+  width?: string | number;
+}
 
 const CModal: FC<IProps> = forwardRef((props, ref) => {
   

@@ -4,11 +4,15 @@ import { DynamicFormRender, FORM_FIELD_TYPE } from 'antd-dynamic-form-render';
 import MdEditorComp from "@src/_components/MdEditor";
 import { useStore } from "@src/_utils/store";
 
+interface IProps {
+  classId?: string;
+}
+
 const { FIELD_TYPE_INPUT, FIELD_TYPE_COMPONENT } = FORM_FIELD_TYPE;
 
-const ClassDetail: React.FC = (props) => {
+const ClassDetail: React.FC<IProps> = (props) => {
 
-  const { classId } = props || {};
+  const { classId } = props;
 
   const [form] = Form.useForm();
   const { classtree } = useStore('classtree');

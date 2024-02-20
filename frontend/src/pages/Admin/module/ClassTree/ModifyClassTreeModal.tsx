@@ -1,13 +1,18 @@
 
-import React, { forwardRef, useImperativeHandle, useRef, useState } from "react";
+import React, { MutableRefObject, forwardRef, useImperativeHandle, useRef, useState } from "react";
 import { Form, notification } from "antd";
 import CModal from "@src/_components/CModal";
 import { FORM_FIELD_TYPE, DynamicFormRender } from 'antd-dynamic-form-render';
 import { useStore } from "@src/_utils/store";
 
+interface IProps {
+  ref?: any;
+  onFresh?: any;
+}
+
 const { FIELD_TYPE_INPUT } = FORM_FIELD_TYPE;
 
-const ModifyClassTreeModal: React.FC =forwardRef((props, ref) => {
+const ModifyClassTreeModal: React.FC<IProps> =forwardRef((props, ref) => {
 
   const { onFresh } = props;
 
@@ -15,11 +20,11 @@ const ModifyClassTreeModal: React.FC =forwardRef((props, ref) => {
 
   const [form] = Form.useForm();
   const [open, setOpen] = useState<boolean>(false);
-  const detailModalRef = useRef(null);
+  const detailModalRef = useRef<any>(null);
   const currNodeRef = useRef({});
 
   const handleSubmit = async () => {
-    const { key, parentId } = currNodeRef.current || {};
+    const { key, parentId } = currNodeRef.current as any;
     const values = await form.validateFields();
     const request = key ? classtree.update : classtree.add;
     await request({ 

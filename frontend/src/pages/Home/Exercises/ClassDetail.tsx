@@ -4,7 +4,11 @@ import MDEditor from '@uiw/react-md-editor';
 import CodeExecutor from "@src/_components/CodeExecutor";
 import { useStore } from "@src/_utils/store";
 
-const ClassDetail: React.FC = (props) => {
+interface IProps {
+  classId?: string;
+}
+
+const ClassDetail: React.FC<IProps> = (props) => {
 
   const { classId } = props || {};
 

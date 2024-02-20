@@ -15,7 +15,7 @@ const ClassTreeContent: React.FC = () => {
   }
 
   const generateTree = () => {
-    return <ClassTree onSelect={handleTreeSelect}/>
+    return <ClassTree onSelect={handleTreeSelect} />;
   };
 
   const generateContent = () => {

@@ -9,6 +9,10 @@ import ModifyClassTreeModal from "./ModifyClassTreeModal";
 
 import "./index.less";
 
+interface IProps {
+  onSelect?: any;
+}
+
 const CONTEXT_MENU_LIST = [
   { key: 'update', name: '更新节点' },
   { key: 'insertNode', name: '插入兄弟节点' },
@@ -16,17 +20,17 @@ const CONTEXT_MENU_LIST = [
   { key: 'delete', name: '删除节点', style: { color: 'red' } },
 ]
 
-const ClassTree: React.FC = (props) => {
+const ClassTree: React.FC <IProps> = (props) => {
 
-  const { onSelect } = props || {};
+  const { onSelect } = props;
 
   const { classtree } = useStore('classtree');
 
-  const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
+  const [selectedKeys, setSelectedKeys] = useState<any>([]);
   const [treeData, setTreeData] = useState([]);
-  const [expandedKeys, setExpandedKeys] = useState<string[]>([]);
+  const [expandedKeys, setExpandedKeys] = useState<any>([]);
   const [searchValue, setSearchValue] = useState<string>("");
-  const [autoExpandParent, setAutoExpandParent] = useState<string>(true);
+  const [autoExpandParent, setAutoExpandParent] = useState<boolean>(true);
   const [contextMenuStyle, setContextMenuStyle] = useState<any>({});
 
   const contextMenuRef = useRef<any>(null);
@@ -156,7 +160,7 @@ const ClassTree: React.FC = (props) => {
   };
 
   // 展开节点
-  const handleExpand = (newExpandedKeys: React.Key[]) => {
+  const handleExpand = (newExpandedKeys: any) => {
     setExpandedKeys(newExpandedKeys);
     setAutoExpandParent(false);
   };
@@ -165,7 +169,7 @@ const ClassTree: React.FC = (props) => {
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     const newExpandedKeys = dataListRef.current
-      .map((item) => item.title.indexOf(value) > -1 ? getTreeParentKey(item.key, treeData) : null)
+      .map((item) => (item.title + '').indexOf(value) > -1 ? getTreeParentKey(item.key, treeData) : undefined)
       .filter((item, i, self): item is React.Key =>!!(item && self.indexOf(item) === i));
     setExpandedKeys(newExpandedKeys);
     setSearchValue(value);
