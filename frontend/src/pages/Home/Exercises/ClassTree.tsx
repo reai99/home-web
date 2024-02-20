@@ -26,6 +26,7 @@ const ClassTree: React.FC = (props) => {
     dataListRef.current = res;
     const treeList = formatSelectToTree(res);
     setTreeData(treeList);
+    setExpandedKeys(res.map(v => v.key));
   }
 
   const formatTreeData = (_treeData) => {

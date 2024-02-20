@@ -41,6 +41,7 @@ const Exercises: React.FC = () => {
         },
       }}
     >
+      <div className="classtree-title">知识学习库</div>
       <div className="classtree-wrapper">
         {generateTree()}
         {generateContent()}

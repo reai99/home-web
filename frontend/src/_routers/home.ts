@@ -14,6 +14,10 @@ export default [
         path: "module",
         component: () => import('@src/pages/Home/ModuleList'),
       },
+      {
+        path: "/exercises",
+        component: () => import('@src/pages/Home/Exercises'),
+      }
     ]
   },
   {

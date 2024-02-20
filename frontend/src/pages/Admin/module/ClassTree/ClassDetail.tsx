@@ -49,9 +49,9 @@ const ClassDetail: React.FC = (props) => {
     const formProps = {
       form,
       mode: 'edit',
-      // layout: 'vertical',
-      formLayout: { labelCol: { span: 3 }, wrapperCol: { span: 21 } },
-      layoutType: 'layout',
+      layout: 'vertical',
+      // formLayout: { labelCol: { span: 3 }, wrapperCol: { span: 21 } },
+      layoutType: 'normal',
       rowCount: 1,
       formList: [
         {

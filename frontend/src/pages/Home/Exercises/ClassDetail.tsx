@@ -1,11 +1,8 @@
 import { Form, Spin, Tabs, TabsProps } from "antd";
 import React, { useEffect, useState } from "react";
-import { DynamicFormRender, FORM_FIELD_TYPE } from 'antd-dynamic-form-render';
-import MdEditorComp from "@src/_components/MdEditor";
+import MDEditor from '@uiw/react-md-editor';
 import CodeExecutor from "@src/_components/CodeExecutor";
 import { useStore } from "@src/_utils/store";
-
-const { FIELD_TYPE_INPUT, FIELD_TYPE_COMPONENT } = FORM_FIELD_TYPE;
 
 const ClassDetail: React.FC = (props) => {
 
@@ -14,6 +11,7 @@ const ClassDetail: React.FC = (props) => {
   const [form] = Form.useForm();
   const { classtree } = useStore('classtree');
   const [loading, setLoading] = useState<boolean>(false);
+  const [detail, setDetail] = useState<any>({});
 
   const fetchDetail = async () => {
     try {
@@ -21,7 +19,7 @@ const ClassDetail: React.FC = (props) => {
       form.resetFields();
       const res = await classtree.detail({ params: { classId }});
       setLoading(false);
-      form.setFieldsValue({ ...res?.[0] });
+      setDetail(res?.[0]);
     } catch (error) {
       setLoading(false);
     }
@@ -34,31 +32,15 @@ const ClassDetail: React.FC = (props) => {
   }, [classId]);
 
   const generateBaseInfo = () => {
-    const formProps = {
-      form,
-      mode: 'view',
-      formLayout: { labelCol: { span: 3 }, wrapperCol: { span: 21 } },
-      layoutType: 'layout',
-      rowCount: 1,
-      formList: [
-        {
-          title: '标题',
-          name: 'title',
-          isRequired: '1',
-          fieldType: FIELD_TYPE_INPUT,
-          rules: [
-            { max: 100, message: '最大长度为100' },
-          ],
-        },
-        {
-          title: '描述',
-          name: 'description',
-          fieldType: FIELD_TYPE_COMPONENT,
-          component: MdEditorComp,
-        }
-      ],
-    }
-    return <DynamicFormRender {...formProps} />
+    const { description, title } = detail || {};
+    return (
+      <div className="classtree-view-baseinfo">
+        <div className="classtree-view-title"> <span>【标题】</span>{title} </div>
+        <div>
+          { description && <MDEditor.Markdown source={description} style={{ whiteSpace: 'pre-wrap' }}/>}
+        </div>
+      </div>
+    )
   }
 
   const generateCodePractice = () => {
