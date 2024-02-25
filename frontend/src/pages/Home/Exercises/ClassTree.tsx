@@ -1,9 +1,10 @@
 
 import React, { useEffect, useRef, useState } from "react";
-import { Tree, Input, Space,  } from "antd";
+import { Tree, Input, Space, Button,  } from "antd";
 import type { TreeDataNode } from "antd";
 import { useStore } from "@src/_utils/store";
 import { formatSelectToTree, getTreeParentKey } from "@src/_utils";
+import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 
 import "./index.less";
 
@@ -17,6 +18,7 @@ const ClassTree: React.FC<IProps> = (props) => {
 
   const { classtree } = useStore('classtree');
 
+  const [fold, setFold] = useState<boolean>(false);
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
   const [treeData, setTreeData] = useState([]);
   const [expandedKeys, setExpandedKeys] = useState<any>([]);
@@ -87,14 +89,26 @@ const ClassTree: React.FC<IProps> = (props) => {
     setAutoExpandParent(true);
   };
 
+  // 树折叠
+  const hanleFold = () => {
+    setFold(!fold);
+  }
+
   useEffect(() => {
     getList();
   }, [])
 
+  const generateFlodBtn = () => {
+    return (
+      <Button icon={fold ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />} onClick={hanleFold}/>
+    )
+  }
+
   const generateTree = () => {
     return (
-      <div className="classtree-tree-wrapper">
+      <div className={"classtree-tree-wrapper" +  (fold ? " class-tree-fold" : "")}>
         <Space.Compact style={{ width: '100%' }}>
+          {generateFlodBtn()}
           <Input  placeholder="请输入" onChange={handleSearchChange}/>
         </Space.Compact>
         <Tree

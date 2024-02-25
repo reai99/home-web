@@ -22,7 +22,7 @@ const CodeExecutor: FC<ReactCodeMirrorProps> = (props) => {
       <div className='code-mirror-title-wrapper'>
         <div className='code-mirror-title'>代码调试工具（react-codemirror）</div>
         <div className='code-mirror-btn'>
-          <button onClick={executeCode}>代码执行</button>
+          <button onClick={executeCode}>执行</button>
         </div>
       </div>
       <CodeMirror

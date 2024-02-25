@@ -1,6 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import { FC, useEffect, useRef, useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import CModal from "../CModal";
 import './index.less';
 
@@ -32,6 +33,8 @@ interface styleDistanceProps {
 const CardBox:FC <IProps> = (props) => {
 
   const { items, onEvent } = props;
+
+  const navigate = useNavigate();
 
   const detailModalRef = useRef(null);
   const [styleDistance, setStyleDistance] = useState<styleDistanceProps>({});
@@ -78,7 +81,7 @@ const CardBox:FC <IProps> = (props) => {
         onEvent?.click?.(v);
         break;
       case '3':
-        window.open(v.serverUrl, '_blank');
+        /^(http|https|ftp):\/\//g.test(v.serverUrl) ? window.open(v.serverUrl, '_blank') : navigate(v.serverUrl);
         break;
     }
   }

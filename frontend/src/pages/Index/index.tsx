@@ -1,7 +1,7 @@
 import { FC, useMemo, useState } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { FloatButton } from 'antd';
-import { HomeOutlined, RollbackOutlined, PlusOutlined, StarOutlined, HeartOutlined, SettingOutlined } from '@ant-design/icons';
+import { HomeOutlined, RollbackOutlined, PlusOutlined, SettingOutlined } from '@ant-design/icons';
 
 import './index.less';
 
@@ -33,8 +33,6 @@ const Index:FC<IProps> = () => {
       >
         <FloatButton icon={<HomeOutlined />} tooltip="主页" onClick={() => navigate('/')}/>
         { parentRouterPath && <FloatButton icon={<RollbackOutlined />} tooltip="返回上一级" onClick={() => navigate(parentRouterPath)} />}
-        <FloatButton icon={<HeartOutlined />} tooltip="喜欢的" />
-        <FloatButton icon={<StarOutlined />} tooltip="收藏的" />
         <FloatButton icon={<SettingOutlined />} tooltip="管理端" onClick={() => window.location.href = '/admin'}/>
       </FloatButton.Group>
     )

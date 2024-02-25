@@ -5,6 +5,9 @@
   font-size: 18px;
   font-weight: 500;
 }
+.class-tree-fold {
+  max-width: 26px!important;
+}
 
 body {
   background-color: #212534;
@@ -12,8 +15,13 @@ body {
 
 .classtree-wrapper {
   display: flex;
-  height: 100%;
+  height: calc(100vh - 90px);
   border: 1px solid rgba(233, 244, 254, 0.2);
+
+  input::placeholder,
+  textarea::placeholder {
+    color: rgba(255,255,255,.3)!important;
+  }
 
   .classtree-tree-input {
     position: absolute;
@@ -24,13 +32,15 @@ body {
     max-width: 220px;
     border: 2px;
     padding: 10px 6px;
-    height: 100%;
     overflow-y: auto;
     position: relative;
     .classtree-tree {
       margin-top: 10px;
       overflow-y: auto;
-      height: calc(100vh - 150px);
+      height: calc(100vh - 160px);
+      .ant-tree-indent-unit {
+        width: 4px!important;
+      }
     }
     .classtree-contextmenu {
       display: none;
@@ -57,7 +67,7 @@ body {
     border-left: 1px solid rgba(233,244,254,0.2);
     margin: 10px;
     overflow-y: auto;
-    height: calc(100vh - 60px);
+    height: calc(100vh - 100px);
     position: relative;
     padding: 0 10px;
     .wmde-markdown {
