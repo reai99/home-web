@@ -1,4 +1,5 @@
-import { Form, Spin, Tabs, TabsProps } from "antd";
+import { Button, Form, Spin, Tabs, TabsProps, Tooltip } from "antd";
+import { ArrowLeftOutlined, ArrowRightOutlined } from "@ant-design/icons";
 import React, { useEffect, useState } from "react";
 import MDEditor from '@uiw/react-md-editor';
 import CodeExecutor from "@src/_components/CodeExecutor";
@@ -6,11 +7,12 @@ import { useStore } from "@src/_utils/store";
 
 interface IProps {
   classId?: string;
+  onChangeTree?: (dir: string) => void;
 }
 
 const ClassDetail: React.FC<IProps> = (props) => {
 
-  const { classId } = props || {};
+  const { classId, onChangeTree } = props || {};
 
   const [form] = Form.useForm();
   const { classtree } = useStore('classtree');
@@ -35,6 +37,10 @@ const ClassDetail: React.FC<IProps> = (props) => {
     }
   }, [classId]);
 
+  const handleChangeTree = (dir: string) => {
+    onChangeTree && onChangeTree(dir);
+  }
+
   const generateBaseInfo = () => {
     const { description, title } = detail || {};
     return (
@@ -47,8 +53,21 @@ const ClassDetail: React.FC<IProps> = (props) => {
     )
   }
 
-  const generateCodePractice = () => {
+  const generateCodePractice = (): React.ReactNode => {
     return <CodeExecutor/>
+  }
+
+  const generateExtraTabbar = (): React.ReactNode => {
+    return (
+      <>
+        <Tooltip title="上一题">
+          <Button size="small" icon={<ArrowLeftOutlined />}  onClick={() => handleChangeTree('l')}/>
+        </Tooltip>
+        <Tooltip title="下一题">
+          <Button className="margin-left-8" size="small" icon={<ArrowRightOutlined />} onClick={() => handleChangeTree('r')}/>
+        </Tooltip>
+      </>
+    )
   }
 
   const items: TabsProps['items'] = [
@@ -66,7 +85,7 @@ const ClassDetail: React.FC<IProps> = (props) => {
 
   return (
     <Spin spinning={loading}>
-      <Tabs items={items} />
+      <Tabs items={items}  tabBarExtraContent={generateExtraTabbar()}/>
     </Spin>
   )
 }

@@ -10,16 +10,16 @@ import "./index.less";
 
 interface IProps {
   onSelect?: any;
+  selectedKeys: string[];
 }
 
 const ClassTree: React.FC<IProps> = (props) => {
 
-  const { onSelect } = props || {};
+  const { onSelect, selectedKeys } = props || {};
 
   const { classtree } = useStore('classtree');
 
   const [fold, setFold] = useState<boolean>(false);
-  const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
   const [treeData, setTreeData] = useState([]);
   const [expandedKeys, setExpandedKeys] = useState<any>([]);
   const [searchValue, setSearchValue] = useState<string>("");
@@ -69,7 +69,6 @@ const ClassTree: React.FC<IProps> = (props) => {
   // 选择节点
   const handleSelect = (_selectedKeys) => {
     onSelect && onSelect(_selectedKeys);
-    setSelectedKeys(_selectedKeys)
   }
 
   // 展开节点

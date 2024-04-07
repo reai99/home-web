@@ -3,9 +3,12 @@ import { fetch } from "../_utils/http";
 
 class Classtree {
 
+  classTreeList = [];
+
   getList = flow(function* (payload) {
     try {
       const { data } = yield fetch('/api/common/classtree/list', 'post', payload);
+      this.classTreeList = data;
       return data;
     } catch (error) {
       return Promise.reject(error)
